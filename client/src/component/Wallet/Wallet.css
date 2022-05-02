@@ -1,0 +1,21 @@
+.connect{
+    width:17%;
+    height:11%;
+    font-size: 1.7em;
+    border-radius: 15px;
+    color:#ffcf33;
+    background-color: #121212;
+    -webkit-box-shadow: 3px 3px 7px 0px #000000; 
+    box-shadow: 3px 3px 7px 0px #000000;
+    cursor: pointer;
+    border:none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.connect img{
+    transform: translateY(-10%);
+    margin-left: 12px;
+    width:15%;
+    height:auto;
+}

@@ -1,0 +1,35 @@
+#stake{
+    display: flex;
+    flex-direction: column;
+}
+
+#up-part{
+    height:250px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3em;
+}
+.logo-stake{
+    position: absolute;
+    margin-left: 500px;
+    width:7%;
+    height:auto;
+}
+
+#bottom-part{
+    display: flex;
+    flex-direction: row;
+    height:150px;
+    justify-content: space-around;
+    align-items: center;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+.logo{
+    position: absolute;
+    margin-left: 210px;
+    width:5%;
+    height:auto;
+}

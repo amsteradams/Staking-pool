@@ -1,0 +1,12 @@
+#displayStats{
+    width:100%;
+    border-bottom: 1px solid #ffcf33;
+    height:10%;
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.logo-stats{
+    width:5%;
+    height:auto;
+}

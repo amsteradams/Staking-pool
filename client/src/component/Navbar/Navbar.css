@@ -1,0 +1,12 @@
+#navBar{
+    width:100%;
+    height:7vh;
+    background-color: #121212;
+    color:white;
+    position: sticky;
+    display: flex;
+    flex: row;
+    align-items: center;
+    -webkit-box-shadow: 1px 4px 9px 0px #000000; 
+    box-shadow: 1px 4px 9px 0px #000000;
+}
