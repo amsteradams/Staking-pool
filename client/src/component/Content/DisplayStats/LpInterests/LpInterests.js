@@ -6,7 +6,7 @@ export default function LpInterests() {
   const [interests, setInterests] = useState();
 
   const getInterest = async () => {
-    const amount = await context.ContractVar.contract.methods.getLpInterests(context.ContractVar.accounts[0]).call({from:context.ContractVar.accounts[0]})
+    const amount = await context.ContractVar.contract.methods.getLpInterests(context.token,context.ContractVar.accounts[0]).call({from:context.ContractVar.accounts[0]})
     setInterests(amount);
   }
   useEffect(() => {
@@ -17,6 +17,6 @@ export default function LpInterests() {
   }, [])
   
   return (
-    <div>Lp Interests : <strong>{(interests / 10**18)}</strong></div>
+    <div>Lp Interests : <strong>{(interests / 10**18).toString()}</strong></div>
   )
 }

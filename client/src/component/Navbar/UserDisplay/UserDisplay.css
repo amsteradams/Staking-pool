@@ -1,4 +1,5 @@
 #userDisplay{
-    margin-left: 20%;
     color :rgb(126, 128, 127) ;
+    position: absolute;
+    right:20px;
 }

@@ -1,12 +1,9 @@
 #title{
     width:25%;
-    margin-left: 35%;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 2em;
-    transform: translateX(8%);
     color:#ffcf33;
-
     
 }

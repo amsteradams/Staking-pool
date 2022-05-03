@@ -12,23 +12,31 @@ export default function Stake(props) {
         setInput(e);
     }
     useEffect(async () => {
-      const amount = await context.ContractVar.contract.methods.stakingOf(context.ContractVar.accounts[0]).call();
+      const amount = await context.ContractVar.contract.methods.stakingOf(context.token,context.ContractVar.accounts[0]).call();
       setAmountStaked(amount);
     }, [])
 
     useEffect(async () => {
-      const allow = context.ContractVar.contract.methods.getAllowanceOf(context.ContractVar.accounts[0]).call().then(elem => {
+      const allow = context.ContractVar.contract.methods.getAllowanceOf(context.token,context.ContractVar.accounts[0]).call().then(elem => {
           setAllowance(elem)
       })
     }, [props.value])
+
+    useEffect(async () => {
+        const allow = context.ContractVar.contract.methods.getAllowanceOf(context.token,context.ContractVar.accounts[0]).call().then(elem => {
+            setAllowance(elem)
+        })
+        const amount = await context.ContractVar.contract.methods.stakingOf(context.token,context.ContractVar.accounts[0]).call();
+      setAmountStaked(amount);
+      }, [context.token])
     
     useEffect(async () => {
-      const amount = await context.ContractVar.contract.methods.stakingOf(context.ContractVar.accounts[0]).call();
+      const amount = await context.ContractVar.contract.methods.stakingOf(context.token,context.ContractVar.accounts[0]).call();
       setAmountStaked(amount);
     }, [])
 
     useEffect(async () => {
-        const amount = await context.ContractVar.contract.methods.stakingOf(context.ContractVar.accounts[0]).call();
+        const amount = await context.ContractVar.contract.methods.stakingOf(context.token,context.ContractVar.accounts[0]).call();
         setAmountStaked(amount);
       }, [props.data])
 
@@ -39,17 +47,23 @@ export default function Stake(props) {
       }, [allowance])  
 
     const stake =async () => {
-        await context.ContractVar.contract.methods.stake((input*(10**18)).toString()).send({from:context.ContractVar.accounts[0]})
+        await context.ContractVar.contract.methods.stake(context.token,(input*(10**18)).toString()).send({from:context.ContractVar.accounts[0]})
     }
 
     const unStake = async () => {
-        await context.ContractVar.contract.methods.unStake().send({from:context.ContractVar.accounts[0]})
+        await context.ContractVar.contract.methods.unStake(context.token).send({from:context.ContractVar.accounts[0]})
+    }
+
+    const setImg = () => {
+        if(context.token == "0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa"){return "dai.png"}
+        else if(context.token == "0xF00503d6771d820C94066a42EdbCc9428652C518"){return "bnb.png"}
+        else if(context.token == "0xe19b09e0a62aDaEc3E1DC59CbE66bDA0Ec8A1FAa"){return "chainlink.png"}
     }
     if(amountStaked == 0){
         return (
             <div id="stake">
                 <div id="up-part">
-                    <input onChange={e => {inputChanged(e.target.value)}} id="input-stake" type="text" placeholder='Amount'/><img src="dai.png" alt="dai logo" class='logo'/>
+                    <input onChange={e => {inputChanged(e.target.value)}} id="input-stake" type="text" placeholder='Amount'/><img src={setImg()} alt="dai logo" className='logo'/>
                 </div>
                 <div id="bottom-part">
                     <Approve value={setApproved} data={approved}/>
@@ -62,7 +76,7 @@ export default function Stake(props) {
         return (
             <div id="stake">
                 <div id="up-part">
-                    Amount staked : {amountStaked / 10**18} <img src="dai.png" alt="dai logo" class='logo-stake'/>
+                    Amount staked : {(amountStaked / 10**18)} <img src={setImg()} alt="dai logo" className='logo-stake'/>
                 </div>
                 <div id="bottom-part">
                     <button onClick={unStake} type="submit" >Unstake</button>

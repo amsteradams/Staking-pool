@@ -3,13 +3,13 @@
     height:92.8vh;
     display:flex;
     justify-content: center;
-    align-items: center;
+    margin-top: 7vh;
+    margin-top: 12%;
 }
 
 #content{
     width:35%;
     height:50%;
-    transform: translateX(-2%);
     background-color: #121212;
     color:white;
     border-radius: 10px;

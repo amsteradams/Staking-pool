@@ -10,7 +10,7 @@ export default function Stake(props) {
     const [balance, setBalance] = useState();
     const [allowance, setAllowance] = useState();
     const getDaiContract = async () => {
-    let kovanDaiAddress = "0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa";
+    let kovanDaiAddress = context.token;
     let minABI = [
       // balanceOf
       {
@@ -34,7 +34,7 @@ export default function Stake(props) {
         try {
             const daiToken = new context.ContractVar.web3.eth.Contract(minABI, kovanDaiAddress);
             const bal = await daiToken.methods.balanceOf(context.ContractVar.accounts[0]).call();
-            const allow = await context.ContractVar.contract.methods.getAllowanceOf(context.ContractVar.accounts[0]).call();
+            const allow = await context.ContractVar.contract.methods.getAllowanceOf(context.token,context.ContractVar.accounts[0]).call();
             if(allow > 0){
               props.value(true);
             }
@@ -57,6 +57,10 @@ export default function Stake(props) {
     useEffect(() => {
       getDaiContract();
     }, [props.data])
+    useEffect(() => {
+      getDaiContract();
+    }, [context.token])
+    
     
       if(allowance < 1){
         return (

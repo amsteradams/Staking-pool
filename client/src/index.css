@@ -14,3 +14,48 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+#tokens{
+  width:25%;
+  display: flex;
+  color: white;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  margin-left: 50%;
+  transform: translateX(-50%);
+  margin-right: auto;
+  margin-top:70px;
+  border-radius: 50px;
+  background-color: rgb(0, 0, 0, 0.2);
+}
+
+#tokens p {
+  margin:40px;
+  font-size: 1.2em;
+  cursor: pointer;
+  
+}
+
+#tokens p:hover {
+  margin:40px;
+  font-size: 1.2em;
+  cursor: pointer;
+  color:#ffcf33;
+}
+
+.active{
+  color:#ffcf33;
+}
+
+#message{
+  font-size: 4em;
+  color:white;
+  position: absolute;
+  margin-top: 50vh;
+  transform: translateY(-50%);
+  margin-bottom: auto;
+  margin-left: 50vw;
+  transform: translateX(-50%);
+}
