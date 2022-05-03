@@ -41,9 +41,6 @@ contract Staking is ERC20{
     /**
     *@param _token is wich token user want to Unstake
     *@notice Unstake your tokens + 3%/year + 2% of LpTokens
-    *@dev I used Chainlink because it was required by the specifications, but
-    *because Dai is a stable coin and solidity does not support float numbers
-    *in this case it will only multiply by 1 (and not 1.010...)
     */
     function unStake(address _token)external{
         require(Balance[msg.sender][_token] > 0, "No tokens staked");
@@ -107,7 +104,7 @@ contract Staking is ERC20{
     *@param _addr is the address we want to verify
     *@return the amount of dai _addr stake in this contract
     */
-    function stakingOf(address _token, address _addr)external view returns(uint){
+    function stakingOf(address _token, address _addr)public view returns(uint){
         return Balance[_addr][_token];
     }
 
@@ -126,6 +123,17 @@ contract Staking is ERC20{
     */
     function getAllowanceOf(address _token, address _addr)public view returns(uint){
         return IERC20(_token).allowance(_addr, address(this));
+    }
+    /**
+    *@param _addr is the guy we want to get the total balance
+    *@return amount locked in the contract in dollar
+    */
+    function getMyDollarBalance(address _addr)external view returns(uint){
+        uint daiBal = (stakingOf(0x4F96Fe3b7A6Cf9725f59d353F723c1bDb64CA6Aa, _addr) / 10**18);
+        uint bnbBal = (stakingOf(0xF00503d6771d820C94066a42EdbCc9428652C518, _addr) / 10**18) * (uint(oracle.getLatestPrice(getOracleAddress(0xF00503d6771d820C94066a42EdbCc9428652C518)))/(10**8));
+        uint linkBal = (stakingOf(0xe19b09e0a62aDaEc3E1DC59CbE66bDA0Ec8A1FAa, _addr) / 10**18) * (uint(oracle.getLatestPrice(getOracleAddress(0xe19b09e0a62aDaEc3E1DC59CbE66bDA0Ec8A1FAa)))/(10**8));
+
+        return linkBal + bnbBal + daiBal;
     }
 
     //Utils

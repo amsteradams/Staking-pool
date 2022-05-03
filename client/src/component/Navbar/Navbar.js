@@ -1,4 +1,5 @@
 import React from 'react'
+import Locked from './Locked/Locked';
 import "./Navbar.css";
 import Title from "./Title/Title.js";
 import UserDisplay from './UserDisplay/UserDisplay';
@@ -13,6 +14,7 @@ export default function
   }
   return (
     <div id="navBar">
+      <Locked />
       <Title />
       <UserDisplay />
     </div>
