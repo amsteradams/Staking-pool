@@ -30,6 +30,7 @@ contract Staking is ERC20{
     *@notice Stake your token and make you earn 3% APR and 2% of LpTokens
     */
     function stake(address _addr, uint amount)external{
+        require(Balance[msg.sender][_addr] > 0, "You have to withdraw before staking more");
         require(IERC20(_addr).balanceOf(msg.sender) >= amount, "Balance is too low");
         require(getAllowanceOf(_addr, msg.sender) >= amount, "Contract not approved");
         IERC20(_addr).transferFrom(msg.sender, address(this), amount);
